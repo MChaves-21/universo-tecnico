@@ -33,7 +33,7 @@ Portfólio pessoal desenvolvido como uma experiência de exploração espacial i
 
 - **HTML5** — Estrutura e SVG do mapa estelar
 - **CSS3** — Animações, Grid Layout, efeitos visuais
-- **JavaScript Vanilla** — Interatividade, Canvas API, partículas
+- **JavaScript Vanilla (ES Modules)** — Interatividade, Canvas API, partículas
 - **Google Fonts** — Orbitron, Share Tech Mono, Exo 2
 - **Canvas API** — Starfield, asteroides, foguetes e estrelas cadentes
 
@@ -41,18 +41,19 @@ Portfólio pessoal desenvolvido como uma experiência de exploração espacial i
 
 ## 🚀 Como Rodar Localmente
 
-Não precisa de instalação ou servidor. Basta abrir o arquivo:
+> ⚠️ O projeto usa **ES Modules** (`import/export`), por isso **não funciona abrindo o `index.html` diretamente** no navegador. É necessário um servidor local.
 
 ```bash
 # Clone o repositório
 git clone https://github.com/MChaves-21/universo-tecnico.git
 
-# Abra o arquivo no navegador
 cd universo-tecnico
-open index.html  # macOS
-# ou
-start index.html  # Windows
+
+# Inicie um servidor local (Node.js necessário)
+npx serve .
 ```
+
+Acesse `http://localhost:3000` no navegador.
 
 ---
 
@@ -73,11 +74,34 @@ Para ativar o GitHub Pages:
 
 ```
 universo-tecnico/
-├── index.html   # Arquivo único com HTML, CSS e JS
-└── README.md    # Este arquivo
+├── index.html              # HTML principal
+├── README.md               # Este arquivo
+│
+├── css/
+│   └── style.css           # Estilos globais e animações
+│
+├── js/
+│   ├── main.js             # Ponto de entrada — orquestra os módulos
+│   ├── background.js       # BackgroundEngine — estrelas, foguetes, asteroides
+│   ├── cursor.js           # CursorEngine + TravelEngine
+│   ├── map.js              # MapEngine — radar, tooltip, nós do mapa
+│   └── ui.js               # UIEngine — carrossel, lightbox, projetos
+│
+├── data/
+│   └── projects.js         # Dados dos projetos e caminhos das imagens
+│
+└── assets/
+    └── images/             # Screenshots dos projetos (.webp)
+        ├── nexos-dashboard.webp
+        ├── nexos-investimentos.webp
+        ├── nexos-openfinance.webp
+        ├── viagempro-dashboard.webp
+        ├── viagempro-usuarios.webp
+        ├── viagempro-relatorios.webp
+        ├── atlas-workflow.webp
+        ├── atlas-airtable.webp
+        └── atlas-email.webp
 ```
-
-> Todo o projeto está contido em um único arquivo `index.html`, incluindo as imagens em base64 — não é necessário nenhum servidor ou dependência externa.
 
 ---
 
