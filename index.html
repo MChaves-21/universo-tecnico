@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Portfólio interativo de Murilo Chaves — explore projetos como asteroides em um universo de código."/>
+  <meta property="og:title" content="Meu Universo Técnico · Murilo Chaves"/>
+  <meta property="og:description" content="Portfólio interativo inspirado no Pequeno Príncipe — clique nos asteroides para descobrir os projetos."/>
+  <title>Meu Universo Técnico · Murilo Chaves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- CURSOR HUD -->
+<div id="hud-cursor">
+  <div class="cur-ring"></div>
+  <div class="cur-cross-h"></div>
+  <div class="cur-cross-v"></div>
+  <div class="cur-dot"></div>
+  <div class="cur-corner cur-tl"></div>
+  <div class="cur-corner cur-tr"></div>
+  <div class="cur-corner cur-bl"></div>
+  <div class="cur-corner cur-br"></div>
+</div>
+<!-- TRAVEL OVERLAY -->
+<div id="travel-overlay"></div>
+<div id="travel-dest"><span class="dest-label">NAVEGANDO PARA</span><span class="dest-name"></span></div>
+
+<canvas id="starfield"></canvas>
+<canvas id="particles"></canvas>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightbox-img" src="" alt=""/>
+  <button id="lightbox-close">✕</button>
+  <button class="lb-nav" id="lb-prev">&#8592;</button>
+  <button class="lb-nav" id="lb-next">&#8594;</button>
+  <div id="lightbox-caption"></div>
+  <div id="lightbox-counter"></div>
+</div>
+<div id="tooltip"><h4 id="tt-title"></h4><p id="tt-desc"></p></div>
+<div class="layout">
+  <header>
+    <h1>Meu Universo Técnico</h1>
+    <p>Explore meus projetos como destinos em um universo de código — clique nos asteroides para descobrir.</p>
+    <div class="scan-line"></div>
+  </header>
+
+  <div class="body-grid">
+    <!-- HUD ESQUERDO: SKILLS -->
+    <aside class="hud">
+      <div class="hud-title">Equipamentos</div>
+      <div class="skill-group">
+        <div class="skill-group-name">Front‑end</div>
+        <div class="skill-item" data-keys="react,nextjs,next.js"><span class="skill-dot dot-blue"></span>React 18 / Next.js 15</div>
+        <div class="skill-item" data-keys="typescript"><span class="skill-dot dot-blue"></span>TypeScript 5</div>
+        <div class="skill-item" data-keys="tailwind"><span class="skill-dot dot-blue"></span>Tailwind CSS</div>
+        <div class="skill-item" data-keys="recharts,shadcn"><span class="skill-dot dot-blue"></span>Recharts / shadcn</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Back‑end &amp; Dados</div>
+        <div class="skill-item" data-keys="node.js,deno"><span class="skill-dot dot-green"></span>Node.js / Deno</div>
+        <div class="skill-item" data-keys="postgresql,mysql"><span class="skill-dot dot-green"></span>PostgreSQL / MySQL</div>
+        <div class="skill-item" data-keys="supabase,firebase"><span class="skill-dot dot-green"></span>Supabase / Firebase</div>
+        <div class="skill-item" data-keys="rest,jwt,apis"><span class="skill-dot dot-green"></span>REST APIs / JWT</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">IA &amp; Automação</div>
+        <div class="skill-item" data-keys="groq,llama"><span class="skill-dot dot-pink"></span>Groq · Llama 3</div>
+        <div class="skill-item" data-keys="gemini"><span class="skill-dot dot-pink"></span>Gemini 2.5 Flash</div>
+        <div class="skill-item" data-keys="n8n"><span class="skill-dot dot-cyan"></span>n8n Workflows</div>
+        <div class="skill-item" data-keys="airtable,pluggy"><span class="skill-dot dot-amber"></span>Airtable / Pluggy</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Ferramentas</div>
+        <div class="skill-item" data-keys="git,github"><span class="skill-dot dot-amber"></span>Git / GitHub</div>
+        <div class="skill-item" data-keys="docker,vercel"><span class="skill-dot dot-amber"></span>Docker / Vercel</div>
+      </div>
+    </aside>
+
+    <!-- CENTRO -->
+    <div class="center-col">
+      <div class="map-wrap">
+        <div class="map-header">
+          <div class="hud-title">Mapa do Universo</div>
+          <div class="map-coords" id="map-coords">SYS 47°N · 23°W · ORBIT STABLE</div>
+        </div>
+        <svg id="universe-map" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="glowBlue" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#60a5fa" stop-opacity=".5"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#34d399" stop-opacity=".5"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowPink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f472b6" stop-opacity=".5"/><stop offset="100%" stop-color="#f472b6" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fbbf24" stop-opacity=".6"/><stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/></radialGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g opacity=".07">
+            <line x1="0" y1="95" x2="700" y2="95" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+            <line x1="0" y1="190" x2="700" y2="190" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+            <line x1="0" y1="285" x2="700" y2="285" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+            <line x1="175" y1="0" x2="175" y2="380" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+            <line x1="350" y1="0" x2="350" y2="380" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+            <line x1="525" y1="0" x2="525" y2="380" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
+          </g>
+          <line id="conn1" class="conn-line" x1="350" y1="190" x2="160" y2="100"/>
+          <line id="conn2" class="conn-line" x1="350" y1="190" x2="540" y2="100"/>
+          <line id="conn3" class="conn-line" x1="350" y1="190" x2="350" y2="320"/>
+          <!-- ORBIT RINGS -->
+          <circle cx="350" cy="190" r="68" fill="none" stroke="#fbbf24" stroke-width=".4" stroke-dasharray="2 5" opacity=".14"/>
+          <circle cx="350" cy="190" r="108" fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 6" opacity=".09"/>
+          <circle cx="350" cy="190" r="148" fill="none" stroke="#34d399" stroke-width=".4" stroke-dasharray="2 8" opacity=".06"/>
+          <!-- RADAR ARM -->
+          <line id="radar-arm" x1="350" y1="190" x2="350" y2="122" stroke="#fbbf24" stroke-width="1.5" opacity=".45" stroke-linecap="round"/>
+          <circle id="radar-tip" cx="350" cy="122" r="2.5" fill="#fbbf24" opacity=".7"/>
+          <!-- NEXOS -->
+          <g class="map-node node-1" data-project="proj1" onmouseenter="showTip(event,'proj1')" onmouseleave="hideTip()" onclick="openProject('proj1')">
+            <ellipse cx="160" cy="100" rx="36" ry="36" fill="url(#glowBlue)" opacity=".6"/>
+            <circle class="node-ring" cx="160" cy="100" r="26" stroke="#60a5fa"/>
+            <circle class="node-circle" cx="160" cy="100" r="16" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="160" cy="100" r="8" fill="#60a5fa" opacity=".9"/>
+            <circle cx="155" cy="96" r="3" fill="#bfdbfe" opacity=".6"/>
+            <text class="map-label-title" x="160" y="135" text-anchor="middle">ASTEROIDE 325</text>
+            <text class="map-label" x="160" y="146" text-anchor="middle">Finanças · IA</text>
+          </g>
+          <!-- ViagemPro -->
+          <g class="map-node node-2" data-project="proj2" onmouseenter="showTip(event,'proj2')" onmouseleave="hideTip()" onclick="openProject('proj2')">
+            <ellipse cx="540" cy="100" rx="36" ry="36" fill="url(#glowGreen)" opacity=".6"/>
+            <circle class="node-ring" cx="540" cy="100" r="26" stroke="#34d399"/>
+            <circle class="node-circle" cx="540" cy="100" r="16" fill="#064e3b" stroke="#34d399" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="540" cy="100" r="8" fill="#34d399" opacity=".9"/>
+            <circle cx="535" cy="96" r="3" fill="#a7f3d0" opacity=".6"/>
+            <text class="map-label-title" x="540" y="135" text-anchor="middle">ASTEROIDE 329</text>
+            <text class="map-label" x="540" y="146" text-anchor="middle">Corporativo · SaaS</text>
+          </g>
+          <!-- ATLAS -->
+          <g class="map-node node-3" data-project="proj3" onmouseenter="showTip(event,'proj3')" onmouseleave="hideTip()" onclick="openProject('proj3')">
+            <ellipse cx="350" cy="320" rx="36" ry="36" fill="url(#glowPink)" opacity=".6"/>
+            <circle class="node-ring" cx="350" cy="320" r="26" stroke="#f472b6"/>
+            <circle class="node-circle" cx="350" cy="320" r="16" fill="#500724" stroke="#f472b6" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="350" cy="320" r="8" fill="#f472b6" opacity=".9"/>
+            <circle cx="345" cy="316" r="3" fill="#fbcfe8" opacity=".6"/>
+            <text class="map-label-title" x="350" y="355" text-anchor="middle">ASTEROIDE 328</text>
+            <text class="map-label" x="350" y="366" text-anchor="middle">Automação · LLM</text>
+          </g>
+          <!-- Você -->
+          <g class="map-node node-you" onclick="openAbout()">
+            <ellipse cx="350" cy="190" rx="44" ry="44" fill="url(#glowGold)" opacity=".4"/>
+            <circle class="you-pulse" cx="350" cy="190" r="22" fill="#fbbf24" opacity=".06"/>
+            <circle class="node-ring" cx="350" cy="190" r="30" stroke="#fbbf24" stroke-dasharray="8 4"/>
+            <circle class="node-circle" cx="350" cy="190" r="20" fill="#1c1505" stroke="#fbbf24" stroke-width="2" filter="url(#glow)"/>
+            <circle cx="350" cy="190" r="10" fill="#fbbf24" opacity=".9"/>
+            <circle cx="345" cy="185" r="4" fill="#fff" opacity=".5"/>
+            <text class="map-label-title" x="350" y="222" text-anchor="middle" fill="#fbbf24">ASTEROIDE B-612</text>
+            <text class="map-label" x="350" y="233" text-anchor="middle">Base Estelar</text>
+          </g>
+          <circle cx="80" cy="280" r="3" fill="#475569" opacity=".5"/>
+          <circle cx="90" cy="268" r="1.5" fill="#475569" opacity=".3"/>
+          <circle cx="620" cy="260" r="2.5" fill="#475569" opacity=".4"/>
+          <circle cx="608" cy="272" r="1.5" fill="#475569" opacity=".3"/>
+          <circle cx="200" cy="310" r="2" fill="#475569" opacity=".3"/>
+          <circle cx="480" cy="50" r="2" fill="#60a5fa" opacity=".3"/>
+          <circle cx="100" cy="50" r="1.5" fill="#60a5fa" opacity=".3"/>
+          <circle cx="620" cy="170" r="1.5" fill="#34d399" opacity=".3"/>
+
+          <!-- PLANETA DECORATIVO 1 - roxo canto superior esquerdo -->
+          <defs>
+            <radialGradient id="pGrad1" cx="35%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="#c084fc"/>
+              <stop offset="100%" stop-color="#581c87"/>
+            </radialGradient>
+            <radialGradient id="pGrad2" cx="35%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="#fb923c"/>
+              <stop offset="100%" stop-color="#7c2d12"/>
+            </radialGradient>
+            <radialGradient id="pGrad3" cx="40%" cy="35%" r="55%">
+              <stop offset="0%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#0c4a6e"/>
+            </radialGradient>
+          </defs>
+          <g opacity=".7">
+            <circle cx="62" cy="52" r="18" fill="url(#pGrad1)"/>
+            <ellipse cx="62" cy="52" rx="30" ry="5" fill="none" stroke="#d8b4fe" stroke-width="1.2" opacity=".5" transform="rotate(-20,62,52)"/>
+            <circle cx="62" cy="45" r="4" fill="#e9d5ff" opacity=".25"/>
+          </g>
+          <!-- PLANETA DECORATIVO 2 - laranja canto direito baixo -->
+          <g opacity=".65">
+            <circle cx="648" cy="330" r="14" fill="url(#pGrad2)"/>
+            <ellipse cx="648" cy="330" rx="23" ry="4" fill="none" stroke="#fdba74" stroke-width="1" opacity=".5" transform="rotate(15,648,330)"/>
+          </g>
+          <!-- PLANETA DECORATIVO 3 - azul direita meio -->
+          <g opacity=".55">
+            <circle cx="660" cy="80" r="10" fill="url(#pGrad3)"/>
+            <circle cx="656" cy="76" r="3" fill="#bae6fd" opacity=".3"/>
+          </g>
+
+          <!-- ASTEROIDES ESTÁTICOS NO MAPA -->
+          <!-- Asteroide 1 -->
+          <g transform="rotate(25,100,200)" opacity=".55">
+            <ellipse cx="100" cy="200" rx="7" ry="5" fill="#374151"/>
+            <ellipse cx="97" cy="198" rx="2" ry="1.5" fill="#4b5563" opacity=".7"/>
+            <circle cx="103" cy="202" r="1" fill="#1f2937"/>
+          </g>
+          <!-- Asteroide 2 -->
+          <g transform="rotate(-15,600,310)" opacity=".5">
+            <ellipse cx="600" cy="310" rx="9" ry="6" fill="#374151"/>
+            <ellipse cx="596" cy="308" rx="2.5" ry="1.5" fill="#4b5563" opacity=".7"/>
+            <circle cx="604" cy="313" r="1.2" fill="#1f2937"/>
+          </g>
+          <!-- Asteroide 3 pequeno -->
+          <g transform="rotate(40,250,50)" opacity=".45">
+            <ellipse cx="250" cy="50" rx="5" ry="3.5" fill="#4b5563"/>
+            <circle cx="252" cy="48" r=".8" fill="#6b7280"/>
+          </g>
+          <!-- Asteroide 4 -->
+          <g transform="rotate(-30,460,340)" opacity=".5">
+            <ellipse cx="460" cy="340" rx="6" ry="4" fill="#374151"/>
+            <circle cx="457" cy="338" r="1" fill="#4b5563"/>
+          </g>
+          <!-- Asteroide 5 canto esq baixo -->
+          <g transform="rotate(10,40,340)" opacity=".4">
+            <ellipse cx="40" cy="340" rx="8" ry="5" fill="#374151"/>
+            <ellipse cx="37" cy="338" rx="2" ry="1.2" fill="#4b5563" opacity=".8"/>
+            <circle cx="43" cy="342" r="1.2" fill="#1f2937"/>
+          </g>
+
+          <!-- ESTRELAS EXTRAS NO MAPA -->
+          <g fill="#fff">
+            <circle cx="30" cy="150" r="1" opacity=".6"/>
+            <circle cx="55" cy="320" r=".8" opacity=".4"/>
+            <circle cx="130" cy="20" r="1.2" opacity=".5"/>
+            <circle cx="290" cy="30" r=".8" opacity=".45"/>
+            <circle cx="420" cy="20" r="1" opacity=".5"/>
+            <circle cx="580" cy="30" r=".8" opacity=".4"/>
+            <circle cx="670" cy="140" r="1" opacity=".5"/>
+            <circle cx="660" cy="200" r=".7" opacity=".35"/>
+            <circle cx="30" cy="240" r=".9" opacity=".4"/>
+            <circle cx="680" cy="350" r=".8" opacity=".35"/>
+            <circle cx="120" cy="360" r="1" opacity=".4"/>
+            <circle cx="500" cy="370" r=".8" opacity=".35"/>
+          </g>
+          <!-- Estrela brilhante com raios -->
+          <g opacity=".5">
+            <circle cx="580" cy="340" r="2" fill="#fbbf24"/>
+            <line x1="580" y1="334" x2="580" y2="330" stroke="#fbbf24" stroke-width=".8" opacity=".5"/>
+            <line x1="580" y1="346" x2="580" y2="350" stroke="#fbbf24" stroke-width=".8" opacity=".5"/>
+            <line x1="574" y1="340" x2="570" y2="340" stroke="#fbbf24" stroke-width=".8" opacity=".5"/>
+            <line x1="586" y1="340" x2="590" y2="340" stroke="#fbbf24" stroke-width=".8" opacity=".5"/>
+          </g>
+          <g opacity=".4">
+            <circle cx="110" cy="240" r="1.5" fill="#60a5fa"/>
+            <line x1="110" y1="236" x2="110" y2="233" stroke="#60a5fa" stroke-width=".7" opacity=".5"/>
+            <line x1="110" y1="244" x2="110" y2="247" stroke="#60a5fa" stroke-width=".7" opacity=".5"/>
+            <line x1="106" y1="240" x2="103" y2="240" stroke="#60a5fa" stroke-width=".7" opacity=".5"/>
+            <line x1="114" y1="240" x2="117" y2="240" stroke="#60a5fa" stroke-width=".7" opacity=".5"/>
+          </g>
+
+          <!-- NEBULOSA SUAVE -->
+          <ellipse cx="80" cy="180" rx="55" ry="35" fill="#7c3aed" opacity=".04"/>
+          <ellipse cx="620" cy="200" rx="50" ry="30" fill="#0891b2" opacity=".04"/>
+          <ellipse cx="350" cy="50" rx="80" ry="25" fill="#be185d" opacity=".03"/>
+
+        </svg>
+      </div>
+      <div class="project-panel" id="project-panel">
+        <div class="project-panel-inner" id="project-content"></div>
+      </div>
+    </div>
+
+    <!-- HUD DIREITO: SOBRE MIM -->
+    <aside class="hud">
+      <div class="hud-title">Sobre Mim</div>
+      <p class="bio-text">Olá! Sou <strong>Murilo</strong>, desenvolvedor full-stack apaixonado por transformar ideias complexas em produtos funcionais e elegantes.</p>
+      <br>
+      <p class="bio-text">Especializado em <strong>interfaces modernas</strong>, <strong>integrações de IA</strong> e sistemas que realmente resolvem problemas do mundo real.</p>
+      <br>
+      <p class="bio-text">Cada projeto é um asteroide neste universo — com sua própria lógica, desafios e aprendizados.</p>
+      <div class="bio-stat">
+        <span>Status:</span> Disponível para oportunidades<br>
+        <span>Localização:</span> Brasil 🇧🇷<br>
+        <span>Foco:</span> Full‑Stack · IA · Automação
+      </div>
+      <br>
+      <div class="hud-title" style="margin-top:.5rem;">Contato</div>
+      <a href="https://github.com/MChaves-21" target="_blank" rel="noopener" class="skill-item" style="color:var(--accent);text-decoration:none;cursor:pointer;">
+        <span class="skill-dot dot-blue"></span>github.com/MChaves-21
+      </a>
+      <a href="https://www.linkedin.com/in/murilo-chaves" target="_blank" rel="noopener" class="skill-item" style="color:var(--accent2);text-decoration:none;cursor:pointer;">
+        <span class="skill-dot dot-green"></span>linkedin.com/in/murilo-chaves
+      </a>
+      <a href="mailto:murilochaves211105@gmail.com" class="skill-item" style="text-decoration:none;cursor:pointer;">
+        <span class="skill-dot dot-pink"></span>murilochaves211105@gmail.com
+      </a>
+    </aside>
+  </div>
+</div>
+
+<!-- Dados -->
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
