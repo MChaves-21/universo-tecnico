@@ -43,7 +43,7 @@ export class MapEngine {
     document.querySelectorAll(".map-node").forEach(n => n.classList.remove("selected"));
     document.querySelector(`[data-project="${id}"]`)?.classList.add("selected");
     document.querySelectorAll(".conn-line").forEach(l => l.classList.remove("active"));
-    const idx = ["proj1", "proj2", "proj3"].indexOf(id) + 1;
+    const idx = ["proj1", "proj2", "proj3", "proj4"].indexOf(id) + 1;
     document.getElementById(`conn${idx}`)?.classList.add("active");
   }
 
