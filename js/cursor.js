@@ -45,27 +45,29 @@ export class TravelEngine {
 
   launch(project, callback) {
     if (this.traveling) return;
+    if (!project) { callback(); return; } // Segurança: projeto não encontrado
+
     this.traveling = true;
 
-    const { name, color } = project;
-    this.destName.textContent = name;
-    this.destName.style.color = color;
-    this.destName.style.textShadow = `0 0 20px ${color}`;
+    try {
+      const { name, color } = project;
+      this.destName.textContent = name;
+      this.destName.style.color = color;
+      this.destName.style.textShadow = `0 0 20px ${color}`;
+      this._spawnWarpLines(color);
+      this.overlay.classList.add("active");
+      this.overlay.style.background =
+        `radial-gradient(circle at 50% 50%, ${color}18 0%, rgba(3,5,15,.88) 100%)`;
+      setTimeout(() => this.dest.classList.add("show"), 100);
+      document.querySelector(".map-wrap").classList.add("traveling");
+      setTimeout(() => this.dest.classList.remove("show"), 580);
+    } catch(e) {
+      console.warn("TravelEngine erro:", e);
+    }
 
-    this._spawnWarpLines(color);
-
-    this.overlay.classList.add("active");
-    this.overlay.style.background =
-      `radial-gradient(circle at 50% 50%, ${color}18 0%, rgba(3,5,15,.88) 100%)`;
-
-    setTimeout(() => this.dest.classList.add("show"), 100);
-
-    document.querySelector(".map-wrap").classList.add("traveling");
-
-    setTimeout(() => this.dest.classList.remove("show"), 580);
     setTimeout(() => {
       this.overlay.classList.remove("active");
-      document.querySelector(".map-wrap").classList.remove("traveling");
+      document.querySelector(".map-wrap")?.classList.remove("traveling");
       this.traveling = false;
       callback();
     }, 860);

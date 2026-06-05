@@ -170,7 +170,9 @@ export class UIEngine {
 
   // ── OPEN PROJECT ──
   openProject(id) {
-    this.travel.launch(PROJECTS[id], () => this._renderProject(id));
+    const p = PROJECTS[id];
+    if (!p) { console.warn(`Projeto "${id}" não encontrado em PROJECTS`); return; }
+    this.travel.launch(p, () => this._renderProject(id));
   }
 
   _renderProject(id) {
