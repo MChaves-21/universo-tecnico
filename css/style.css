@@ -28,6 +28,7 @@ header p{font-size:.95rem;color:var(--muted);font-weight:300;letter-spacing:.02e
 .dot-blue{background:#60a5fa;box-shadow:0 0 5px #60a5fa;}
 .dot-green{background:#34d399;box-shadow:0 0 5px #34d399;}
 .dot-pink{background:#f472b6;box-shadow:0 0 5px #f472b6;}
+.dot-red{background:#ef4444;box-shadow:0 0 5px #ef4444;}
 .dot-amber{background:#fbbf24;box-shadow:0 0 5px #fbbf24;}
 .dot-purple{background:#a78bfa;box-shadow:0 0 5px #a78bfa;}
 .dot-cyan{background:#22d3ee;box-shadow:0 0 5px #22d3ee;}

@@ -45,7 +45,7 @@ export const PROJECTS = {
     name:"MKTAutomation",tag:"ASTEROIDE 330",color:"#f59e0b",colorBg:"rgba(245,158,11,.1)",
     category:"Automação de Marketing · IA · Multi-plataforma",
     desc:"Sistema que recebe uma publicação original e a adapta automaticamente para Twitter/X, Instagram, LinkedIn e Facebook — ajustando tom, tamanho, emojis e hashtags via Google Gemini Flash. Conta com agendamento, preview em tempo real, histórico de publicações e painel de estatísticas.",
-    tech:["Python","Flask","Google Gemini Flash","APScheduler","PostgreSQL","Render","GitHub Actions"],
+    tech:["Python","Flask","Google Gemini Flash","APScheduler","PostgreSQL · Aiven","Login/Senha Auth","Render","CI/CD GitHub"],
     link:"https://github.com/MChaves-21/Automacao_Publicacao",
     insight:"Construir para resolver um problema real de uma empresa muda completamente a forma como você pensa cada decisão técnica — cada linha de código passa a ter um propósito concreto.",
     imgs:["m1","m2","m3"],
