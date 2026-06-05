@@ -93,6 +93,7 @@
             <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#34d399" stop-opacity=".5"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/></radialGradient>
             <radialGradient id="glowPink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f472b6" stop-opacity=".5"/><stop offset="100%" stop-color="#f472b6" stop-opacity="0"/></radialGradient>
             <radialGradient id="glowGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fbbf24" stop-opacity=".6"/><stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowAmber" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f59e0b" stop-opacity=".5"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
             <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
           <g opacity=".07">
@@ -103,62 +104,53 @@
             <line x1="350" y1="0" x2="350" y2="380" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
             <line x1="525" y1="0" x2="525" y2="380" stroke="#60a5fa" stroke-width=".5" stroke-dasharray="2 8"/>
           </g>
-          <line id="conn1" class="conn-line" x1="350" y1="190" x2="160" y2="100"/>
-          <line id="conn2" class="conn-line" x1="350" y1="190" x2="540" y2="100"/>
-          <line id="conn3" class="conn-line" x1="350" y1="190" x2="350" y2="320"/>
-          <line id="conn4" class="conn-line" x1="350" y1="190" x2="540" y2="290"/>
+          <line id="conn1" class="conn-line" x1="350" y1="190" x2="175" y2="78"/>
+          <line id="conn2" class="conn-line" x1="350" y1="190" x2="525" y2="78"/>
+          <line id="conn3" class="conn-line" x1="350" y1="190" x2="175" y2="302"/>
+          <line id="conn4" class="conn-line" x1="350" y1="190" x2="525" y2="302"/>
           <!-- ORBIT RINGS -->
-          <circle cx="350" cy="190" r="68" fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 5" opacity=".14"/>
-          <circle cx="350" cy="190" r="108" fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 6" opacity=".09"/>
-          <circle cx="350" cy="190" r="148" fill="none" stroke="#34d399" stroke-width=".4" stroke-dasharray="2 8" opacity=".06"/>
-          <!-- RADAR ARM -->
-          <line id="radar-arm" x1="350" y1="190" x2="350" y2="122" stroke="#60a5fa" stroke-width="1.5" opacity=".45" stroke-linecap="round"/>
-          <circle id="radar-tip" cx="350" cy="122" r="2.5" fill="#60a5fa" opacity=".7"/>
-          <!-- NEXOS -->
-          <g class="map-node node-1" data-project="proj1" onmouseenter="showTip(event,'proj1')" onmouseleave="hideTip()" onclick="openProject('proj1')">
-            <ellipse cx="160" cy="100" rx="36" ry="36" fill="url(#glowBlue)" opacity=".6"/>
-            <circle class="node-ring" cx="160" cy="100" r="26" stroke="#60a5fa"/>
-            <circle class="node-circle" cx="160" cy="100" r="16" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1.5" filter="url(#glow)"/>
-            <circle cx="160" cy="100" r="8" fill="#60a5fa" opacity=".9"/>
-            <circle cx="155" cy="96" r="3" fill="#bfdbfe" opacity=".6"/>
-            <text class="map-label-title" x="160" y="135" text-anchor="middle">ASTEROIDE 325</text>
-            <text class="map-label" x="160" y="146" text-anchor="middle">Finanças · IA</text>
+          <circle cx="350" cy="190" r="68"  fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 5" opacity=".12"/>
+          <circle cx="350" cy="190" r="120" fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 6" opacity=".07"/>
+          <circle cx="350" cy="190" r="170" fill="none" stroke="#34d399" stroke-width=".4" stroke-dasharray="2 8" opacity=".05"/>
+          <!-- NEXOS — topo esquerdo -->
+          <g class="map-node node-1" data-project="proj1">
+            <ellipse cx="175" cy="78" rx="36" ry="36" fill="url(#glowBlue)" opacity=".6"/>
+            <circle class="node-ring" cx="175" cy="78" r="26" stroke="#60a5fa"/>
+            <circle class="node-circle" cx="175" cy="78" r="16" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="175" cy="78" r="8" fill="#60a5fa" opacity=".9"/>
+            <circle cx="170" cy="74" r="3" fill="#bfdbfe" opacity=".6"/>
+            <text class="map-label-title" x="175" y="113" text-anchor="middle">ASTEROIDE 325</text>
+            <text class="map-label" x="175" y="124" text-anchor="middle">Finanças · IA</text>
           </g>
-          <!-- ViagemPro -->
-          <g class="map-node node-2" data-project="proj2" onmouseenter="showTip(event,'proj2')" onmouseleave="hideTip()" onclick="openProject('proj2')">
-            <ellipse cx="540" cy="100" rx="36" ry="36" fill="url(#glowGreen)" opacity=".6"/>
-            <circle class="node-ring" cx="540" cy="100" r="26" stroke="#34d399"/>
-            <circle class="node-circle" cx="540" cy="100" r="16" fill="#064e3b" stroke="#34d399" stroke-width="1.5" filter="url(#glow)"/>
-            <circle cx="540" cy="100" r="8" fill="#34d399" opacity=".9"/>
-            <circle cx="535" cy="96" r="3" fill="#a7f3d0" opacity=".6"/>
-            <text class="map-label-title" x="540" y="135" text-anchor="middle">ASTEROIDE 329</text>
-            <text class="map-label" x="540" y="146" text-anchor="middle">Corporativo · SaaS</text>
+          <!-- ViagemPro — topo direito -->
+          <g class="map-node node-2" data-project="proj2">
+            <ellipse cx="525" cy="78" rx="36" ry="36" fill="url(#glowGreen)" opacity=".6"/>
+            <circle class="node-ring" cx="525" cy="78" r="26" stroke="#34d399"/>
+            <circle class="node-circle" cx="525" cy="78" r="16" fill="#064e3b" stroke="#34d399" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="525" cy="78" r="8" fill="#34d399" opacity=".9"/>
+            <circle cx="520" cy="74" r="3" fill="#a7f3d0" opacity=".6"/>
+            <text class="map-label-title" x="525" y="113" text-anchor="middle">ASTEROIDE 329</text>
+            <text class="map-label" x="525" y="124" text-anchor="middle">Corporativo · SaaS</text>
           </g>
-          <!-- ATLAS -->
-          <g class="map-node node-3" data-project="proj3" onmouseenter="showTip(event,'proj3')" onmouseleave="hideTip()" onclick="openProject('proj3')">
-            <ellipse cx="350" cy="320" rx="36" ry="36" fill="url(#glowPink)" opacity=".6"/>
-            <circle class="node-ring" cx="350" cy="320" r="26" stroke="#f472b6"/>
-            <circle class="node-circle" cx="350" cy="320" r="16" fill="#500724" stroke="#f472b6" stroke-width="1.5" filter="url(#glow)"/>
-            <circle cx="350" cy="320" r="8" fill="#f472b6" opacity=".9"/>
-            <circle cx="345" cy="316" r="3" fill="#fbcfe8" opacity=".6"/>
-            <text class="map-label-title" x="350" y="355" text-anchor="middle">ASTEROIDE 328</text>
-            <text class="map-label" x="350" y="366" text-anchor="middle">Automação · LLM</text>
+          <!-- ATLAS — baixo esquerdo -->
+          <g class="map-node node-3" data-project="proj3">
+            <ellipse cx="175" cy="302" rx="36" ry="36" fill="url(#glowPink)" opacity=".6"/>
+            <circle class="node-ring" cx="175" cy="302" r="26" stroke="#f472b6"/>
+            <circle class="node-circle" cx="175" cy="302" r="16" fill="#500724" stroke="#f472b6" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="175" cy="302" r="8" fill="#f472b6" opacity=".9"/>
+            <circle cx="170" cy="298" r="3" fill="#fbcfe8" opacity=".6"/>
+            <text class="map-label-title" x="175" y="268" text-anchor="middle">ASTEROIDE 328</text>
+            <text class="map-label" x="175" y="279" text-anchor="middle">Automação · LLM</text>
           </g>
-          <!-- MKTAutomation -->
-          <defs>
-            <radialGradient id="glowAmber" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#f59e0b" stop-opacity=".5"/>
-              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <g class="map-node node-4" data-project="proj4" onmouseenter="showTip(event,'proj4')" onmouseleave="hideTip()" onclick="openProject('proj4')">
-            <ellipse cx="540" cy="290" rx="36" ry="36" fill="url(#glowAmber)" opacity=".6"/>
-            <circle class="node-ring" cx="540" cy="290" r="26" stroke="#f59e0b"/>
-            <circle class="node-circle" cx="540" cy="290" r="16" fill="#451a03" stroke="#f59e0b" stroke-width="1.5" filter="url(#glow)"/>
-            <circle cx="540" cy="290" r="8" fill="#f59e0b" opacity=".9"/>
-            <circle cx="535" cy="286" r="3" fill="#fde68a" opacity=".6"/>
-            <text class="map-label-title" x="540" y="325" text-anchor="middle">ASTEROIDE 330</text>
-            <text class="map-label" x="540" y="336" text-anchor="middle">Marketing · IA</text>
+          <!-- MKTAutomation — baixo direito -->
+          <g class="map-node node-4" data-project="proj4">
+            <ellipse cx="525" cy="302" rx="36" ry="36" fill="url(#glowAmber)" opacity=".6"/>
+            <circle class="node-ring" cx="525" cy="302" r="26" stroke="#f59e0b"/>
+            <circle class="node-circle" cx="525" cy="302" r="16" fill="#451a03" stroke="#f59e0b" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="525" cy="302" r="8" fill="#f59e0b" opacity=".9"/>
+            <circle cx="520" cy="298" r="3" fill="#fde68a" opacity=".6"/>
+            <text class="map-label-title" x="525" y="268" text-anchor="middle">ASTEROIDE 330</text>
+            <text class="map-label" x="525" y="279" text-anchor="middle">Marketing · IA</text>
           </g>
           <!-- TERRA (centro) -->
           <defs>
@@ -197,7 +189,7 @@
             <circle cx="344" cy="183" r="4" fill="#bfdbfe" opacity=".15"/>
             <!-- Labels -->
             <text class="map-label-title" x="350" y="222" text-anchor="middle" fill="#60a5fa">TERRA</text>
-            <text class="map-label" x="350" y="233" text-anchor="middle">Base Estelar</text>
+            <text class="map-label" x="350" y="233" text-anchor="middle">Asteroide B-612</text>
           </g>
           <circle cx="80" cy="280" r="3" fill="#475569" opacity=".5"/>
           <circle cx="90" cy="268" r="1.5" fill="#475569" opacity=".3"/>

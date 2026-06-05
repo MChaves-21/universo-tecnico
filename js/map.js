@@ -1,23 +1,8 @@
-// MapEngine — radar, tooltip, animação de entrada dos nós
+// MapEngine — tooltip, animação de entrada dos nós
 
 export class MapEngine {
   constructor() {
-    this.radarAngle = 0;
-    this.arm = document.getElementById("radar-arm");
-    this.tip = document.getElementById("radar-tip");
     this.coords = document.getElementById("map-coords");
-    this.CX = 350; this.CY = 190; this.R = 68;
-  }
-
-  tick() {
-    this.radarAngle += 0.6;
-    const rad = this.radarAngle * Math.PI / 180;
-    const x = this.CX + Math.sin(rad) * this.R;
-    const y = this.CY - Math.cos(rad) * this.R;
-    this.arm?.setAttribute("x2", x);
-    this.arm?.setAttribute("y2", y);
-    this.tip?.setAttribute("cx", x);
-    this.tip?.setAttribute("cy", y);
   }
 
   revealNodes() {
