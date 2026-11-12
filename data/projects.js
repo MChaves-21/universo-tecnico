@@ -50,22 +50,4 @@ export const PROJECTS = {
     insight:"Construir para resolver um problema real de uma empresa muda completamente a forma como você pensa cada decisão técnica — cada linha de código passa a ter um propósito concreto.",
     imgs:["m1","m2","m3"],
   },
-  proj5: {
-    name:"Crash Game",tag:"ASTEROIDE 331",color:"#a78bfa",colorBg:"rgba(167,139,250,.1)",
-    category:"Desafio técnico · Tempo real · Microsserviços",
-    desc:"Crash game multiplayer feito como desafio técnico de processo seletivo: o multiplicador sobe ao vivo e cada jogador precisa sacar antes da queda. Dois microsserviços (jogo e carteira) conversam por RabbitMQ com sagas e padrão outbox/inbox, para nenhum débito ou crédito se perder ou duplicar. Dinheiro em centavos inteiros (BigInt), WebSocket, Kong e Keycloak, tudo subindo com Docker Compose.",
-    tech:["TypeScript","NestJS","Bun","RabbitMQ","PostgreSQL","React","WebSocket","Keycloak","Kong","Docker"],
-    link:"https://github.com/MChaves-21/crash_game",
-    insight:"Em sistemas distribuídos, o difícil não é mandar a mensagem — é garantir que ela chegue exatamente uma vez, mesmo quando algo cai no meio do caminho.",
-    imgs:[],
-  },
-  proj6: {
-    name:"Desafio Target",tag:"ASTEROIDE 332",color:"#22d3ee",colorBg:"rgba(34,211,238,.1)",
-    category:"Desafio técnico · C# · Testes",
-    desc:"Solução em C# / .NET 8 para o desafio técnico da Target Sistemas: comissão de vendas, movimentação de estoque e juros por atraso. As regras ficam numa biblioteca separada do console, testadas com xUnit, com build e testes automáticos no GitHub Actions.",
-    tech:["C#",".NET 8","xUnit","GitHub Actions"],
-    link:"https://github.com/MChaves-21/desafio-target-sistemas",
-    insight:"Separar as regras de negócio da interface desde o começo deixa tudo testável e pronto para virar API sem reescrever nada.",
-    imgs:[],
-  },
 };
