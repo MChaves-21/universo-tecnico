@@ -82,6 +82,7 @@ export class UIEngine {
 
   // ── CAROUSEL ──
   _buildCarousel(imgKeys, color) {
+    if (!imgKeys?.length) return "";
     const slides = imgKeys.map((k, i) =>
       `<div class="carousel-slide">
         <img src="${IMAGES[k]}" alt="Screenshot ${i + 1}" loading="lazy" data-lb-idx="${i}"/>
@@ -103,6 +104,7 @@ export class UIEngine {
   }
 
   _bindCarousel(imgKeys, projectName) {
+    if (!imgKeys?.length) return;
     this.curSlide = 0;
     this.totalSlides = imgKeys.length;
 

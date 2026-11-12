@@ -52,6 +52,8 @@ header p{font-size:.95rem;color:var(--muted);font-weight:300;letter-spacing:.02e
 .node-1 .node-ring{stroke:#60a5fa;animation-duration:10s;}
 .node-2 .node-ring{stroke:#34d399;animation-duration:12s;}
 .node-3 .node-ring{stroke:#f472b6;animation-duration:9s;}
+.node-5 .node-ring{stroke:#a78bfa;animation-duration:11s;}
+.node-6 .node-ring{stroke:#22d3ee;animation-duration:13s;}
 .map-label{font-family:'Share Tech Mono',monospace;font-size:10px;fill:#94a3b8;pointer-events:none;}
 .map-label-title{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:600;fill:#e2e8f0;pointer-events:none;}
 .conn-line{stroke:#1e3a5f;stroke-width:1;stroke-dasharray:4 4;opacity:.6;}

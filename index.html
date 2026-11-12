@@ -97,6 +97,8 @@
             <radialGradient id="glowPink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f472b6" stop-opacity=".5"/><stop offset="100%" stop-color="#f472b6" stop-opacity="0"/></radialGradient>
             <radialGradient id="glowGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fbbf24" stop-opacity=".6"/><stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/></radialGradient>
             <radialGradient id="glowAmber" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f59e0b" stop-opacity=".5"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowPurple" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a78bfa" stop-opacity=".5"/><stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#22d3ee" stop-opacity=".5"/><stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
             <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
           <g opacity=".07">
@@ -111,6 +113,8 @@
           <line id="conn2" class="conn-line" x1="350" y1="190" x2="525" y2="78"/>
           <line id="conn3" class="conn-line" x1="350" y1="190" x2="175" y2="302"/>
           <line id="conn4" class="conn-line" x1="350" y1="190" x2="525" y2="302"/>
+          <line id="conn5" class="conn-line" x1="350" y1="190" x2="70" y2="190"/>
+          <line id="conn6" class="conn-line" x1="350" y1="190" x2="630" y2="190"/>
           <!-- ORBIT RINGS -->
           <circle cx="350" cy="190" r="68"  fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 5" opacity=".12"/>
           <circle cx="350" cy="190" r="120" fill="none" stroke="#60a5fa" stroke-width=".4" stroke-dasharray="2 6" opacity=".07"/>
@@ -154,6 +158,26 @@
             <circle cx="520" cy="298" r="3" fill="#fde68a" opacity=".6"/>
             <text class="map-label-title" x="525" y="268" text-anchor="middle">ASTEROIDE 330</text>
             <text class="map-label" x="525" y="279" text-anchor="middle">Marketing · IA</text>
+          </g>
+          <!-- Crash Game — meio esquerdo -->
+          <g class="map-node node-5" data-project="proj5">
+            <ellipse cx="70" cy="190" rx="32" ry="32" fill="url(#glowPurple)" opacity=".6"/>
+            <circle class="node-ring" cx="70" cy="190" r="24" stroke="#a78bfa"/>
+            <circle class="node-circle" cx="70" cy="190" r="15" fill="#2e1065" stroke="#a78bfa" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="70" cy="190" r="7" fill="#a78bfa" opacity=".9"/>
+            <circle cx="65" cy="186" r="3" fill="#ddd6fe" opacity=".6"/>
+            <text class="map-label-title" x="70" y="224" text-anchor="middle">ASTEROIDE 331</text>
+            <text class="map-label" x="70" y="235" text-anchor="middle">Tempo real · Microsserviços</text>
+          </g>
+          <!-- Desafio Target — meio direito -->
+          <g class="map-node node-6" data-project="proj6">
+            <ellipse cx="630" cy="190" rx="32" ry="32" fill="url(#glowCyan)" opacity=".6"/>
+            <circle class="node-ring" cx="630" cy="190" r="24" stroke="#22d3ee"/>
+            <circle class="node-circle" cx="630" cy="190" r="15" fill="#083344" stroke="#22d3ee" stroke-width="1.5" filter="url(#glow)"/>
+            <circle cx="630" cy="190" r="7" fill="#22d3ee" opacity=".9"/>
+            <circle cx="625" cy="186" r="3" fill="#a5f3fc" opacity=".6"/>
+            <text class="map-label-title" x="630" y="224" text-anchor="middle">ASTEROIDE 332</text>
+            <text class="map-label" x="630" y="235" text-anchor="middle">C# · .NET · Testes</text>
           </g>
           <!-- TERRA (centro) -->
           <defs>

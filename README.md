@@ -26,6 +26,9 @@ Portfólio pessoal desenvolvido como uma experiência de exploração espacial i
 | 325 | NEXOS | React, Supabase, Groq, Pluggy |
 | 329 | ViagemPro | Next.js, MySQL, JWT |
 | 328 | ATLAS | n8n, Llama 3, Airtable |
+| 330 | MKT Automation | Python, Flask, Gemini, PostgreSQL |
+| 331 | Crash Game (desafio técnico) | NestJS, Bun, RabbitMQ, PostgreSQL |
+| 332 | Desafio Target (desafio técnico) | C#, .NET 8, xUnit |
 
 ---
 
